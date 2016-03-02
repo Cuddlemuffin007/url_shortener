@@ -1,5 +1,4 @@
 from django.db import models
-from django.utils import timezone
 
 
 class Bookmark(models.Model):
@@ -7,10 +6,17 @@ class Bookmark(models.Model):
     title = models.CharField(max_length=15)
     description = models.TextField(blank=True)
     shortened = models.CharField(max_length=10)
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created']
 
 
 class Click(models.Model):
     bookmark = models.ForeignKey(Bookmark)
-    created = models.DateField(timezone.now())
-    accessed = models.DateField(null=True)
+    accessed = models.DateTimeField(null=True)
     access_count = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ['bookmark']
+

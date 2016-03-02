@@ -1,8 +1,7 @@
-from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic import View, ListView
-from django.utils import timezone
+from datetime import datetime
 from hashids import Hashids
 
 from url_short_app.forms import BookmarkForm
@@ -11,6 +10,7 @@ from url_short_app.models import Bookmark, Click
 
 class IndexView(ListView):
     model = Click
+
 
 class CreateView(View):
 
@@ -25,7 +25,7 @@ class CreateView(View):
             new_bookmark = form_instance.save()
             new_bookmark.shortened = hashids.encode(new_bookmark.pk)
             new_bookmark.save()
-            Click.objects.create(bookmark=new_bookmark, created=timezone.now())
+            Click.objects.create(bookmark=new_bookmark)
 
             return render(request, 'shortened.html', {'object': new_bookmark})
         else:
@@ -37,7 +37,7 @@ class BookmarkView(View):
     def get(self, request, short):
         bookmark = Bookmark.objects.get(shortened=short)
         click = Click.objects.get(bookmark=bookmark)
-        click.accessed = timezone.now()
+        click.accessed = datetime.now()
         click.access_count += 1
         click.save()
 
