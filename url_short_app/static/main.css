@@ -1,0 +1,45 @@
+.nav a {
+    font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+    font-size: 18px;
+    color: white;
+}
+
+.nav li {
+    background: #378;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+.nav {
+    padding: 1.5em 0;
+}
+
+.headers {
+    font-weight: 900;
+    border-bottom: 1px solid black;
+    margin-bottom: 1em;
+}
+
+.shortened-view p {
+    font-size: 2em;
+    text-align: center;
+    padding-top: 2em;
+}
+
+button.my-color {
+    background: #337788;
+}
+
+form label {
+    font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+    display: block;
+}
+
+form {
+    margin-bottom: 2em;
+}
+
+#id_url, #id_title, #id_description {
+    width: 500px;
+    line-height: 2em;
+}
